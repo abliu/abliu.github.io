@@ -1,7 +1,7 @@
 # Estimating the impact of working on elections
 
 
-[This is for those interested in electoral work. Numbers below are highly speculative.]
+[This is for those interested in electoral work. I'm a real beginner at making this kind of estimate, but luckily I followed the lead of a paper called "What is the probability your vote will make a difference?" (Gelman, Silver and Edlin 2012). Numbers below are highly speculative.]
 
 
 What is the impact of working on the 2020 election (e.g. via GOTV)? Morris and Gelman estimate that the probability of a single vote deciding the presidential election is at most 2e-7 (in competitive states like New Hampshire) and lower in other states.[1] Assuming that the probability for n votes being decisive is almost n times the probability for one vote, I estimate that boosting the vote margin for Democrats by 2% of turnout in nine swing states increases Biden’s chances of winning by 9%.[2] Let’s say I personally did 1% of the work that boosted the vote margins by 2%; then I increased Biden’s chances of winning by .09%.
