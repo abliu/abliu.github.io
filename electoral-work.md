@@ -45,7 +45,7 @@ Anyway, these numbers make me like the impact of doing high-leverage electoral w
 
 [12] McCartan, “2020 Election Forecasts.”
 
-[13] Stuart Rothenberg, “The GOP’s Long-Term Structural Senate Advantage | News & Analysis | Inside Elections,” accessed June 28, 2020, https://insideelections.com/news/article/the-gops-long-term-structural-senate-advantage.
+[13] Stuart Rothenberg, “The GOP’s Long-Term Structural Senate Advantage - News & Analysis - Inside Elections,” accessed June 28, 2020, https://insideelections.com/news/article/the-gops-long-term-structural-senate-advantage.
 
 [14] This is a rough calculation based on data from CAIT Climate Data Explorer via Climate Watch (Hannah Ritchie and Max Roser, “CO₂ and Greenhouse Gas Emissions,” Our World in Data, May 11, 2017, https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions). In 2016, the world emitted 49.36 Gt CO2eq of GHGs, of which the US emitted 5.83 Gt. (I use tons and metric tons interchangeably since they approximately match.) I therefore assume that the US is responsible for ~12% (5.83 / 49.36) of new annual atmospheric ppm of CO2, which seems to be growing at ~3 ppm/year. 12% * 3 = 0.36.
 
