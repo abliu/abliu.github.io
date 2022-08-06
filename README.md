@@ -2,7 +2,7 @@
 
 <img src="/assets/about_headshot.jpg" width="200" align="right" style="margin: -50px 0px 20px 40px">
 
-[**Resume**](/assets/Andrew_Liu_Resume_08-06-22.pdf)
+[**Resume (August 6, 2022)**](/assets/Andrew_Liu_Resume_08-06-22.pdf)
 
 I am a PhD student in Bioinformatics and Integrative Genomics at Harvard Medical School and a Fellow in the Emerging Leaders in Biosecurity program. In my PhD in Michael Springer's lab, I have published scientific research in infectious diseases, biosecurity and pandemic preparedness:
 
