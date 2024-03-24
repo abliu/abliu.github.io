@@ -1,10 +1,16 @@
-# At-home sleep apnea test
+# Home sleep apnea test
+
+March 2024
 
 tl;dr: For sleep apnea, I think I found a \~\$200 ownable at-home test
 that measures most of what is measured in more expensive in-lab sleep
 studies.
 
 ------------------------------------------------------------------------
+
+Note: The information in this post is for general educational purposes
+only and should not be construed as professional medical advice,
+diagnosis, or treatment.
 
 I was told by a sleep scientist that I should check every few years if I
 snore, and if I snore, I should get tested for obstructive sleep apnea

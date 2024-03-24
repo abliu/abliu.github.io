@@ -7,11 +7,15 @@ bibliography: references.bib
 csl: default-nmed.csl
 ---
 
-# At-home sleep apnea test
+# Home sleep apnea test
+
+March 2024
 
 tl;dr: For sleep apnea, I think I found a ~$200 ownable at-home test that measures most of what is measured in more expensive in-lab sleep studies.
 
 ---
+
+Note: The information in this post is for general educational purposes only and should not be construed as professional medical advice, diagnosis, or treatment.
 
 I was told by a sleep scientist that I should check every few years if I snore, and if I snore, I should get tested for obstructive sleep apnea (OSA). After recording myself with the iPhone app SnoreLab, I found that I now do lightly snore some nights (0-5% of the time). The gold standard test for sleep apnea is an overnight in-lab sleep study, but these can have monthslong waits and cost thousands of dollars (even with insurance!^[I talked to three friends who got sleep studies done. Two paid thousands of dollars with insurance while one got it essentially for free.]). Your doctor can also prescribe you a cheaper, borrowed take-home test provided by a sleep clinic, but such results can be inaccurate and hard to verify due to equipment, clinic, or user error.^[I have a friend who got a take-home test from a clinic which incorrectly said he was healthy when he actually had severe sleep apnea. He thinks the misdiagnosis might have been due to aforementioned reasons of faulty equipment, user error in attaching the equipment, and/or clerical error of mixing up patient reports. Other general reasons for inaccuracy: [the test might not measure key metrics like airflow](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8883090/), the equipment might get disconnected during the tossing and turning of sleep, or the clinic might not provide detailed data which can be checked against common sense and a sleep audio recording.]
 
