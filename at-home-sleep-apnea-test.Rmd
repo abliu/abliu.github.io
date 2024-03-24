@@ -1,5 +1,4 @@
 ---
-title: "At-home sleep apnea test"
 output:
   md_document:
     variant: gfm
@@ -7,6 +6,8 @@ output:
 bibliography: references.bib
 csl: default-nmed.csl
 ---
+
+# At-home sleep apnea test
 
 tl;dr: For sleep apnea, I think I found a ~$200 ownable at-home test that measures most of what is measured in more expensive in-lab sleep studies.
 
@@ -25,3 +26,5 @@ Some caveats:
 1. _Nasal airflow and blood oxygen are not everything_: An in-lab sleep study additionally measures respiratory effort (with chest and abdomen belts) and arousals and sleep cycles with EEG. My understanding is that the belts are mainly needed to distinguish obstructive and central apnea events, but are not critical for detecting _whether_ an apnea event has occurred. Consumer EEG headsets might be acquired separately; [here are](https://www.frontiersin.org/articles/10.3389/fninf.2020.553352) [two lists](https://learn.neurotechedu.com/headsets/) and the late [Zeo](https://en.wikipedia.org/wiki/Zeo,_Inc.) was an EEG headband specifically designed for sleep. Sleep cycles might be measured by other wearables based on accelerometer, heart rate, temperature, and other biometrics.^[The [Oura ring](https://www.sciencedirect.com/science/article/pii/S1389945724000200) takes this approach.]
 2. _Not all at-home devices are equal_: Given the relatively cheap and comprehensive device above, I would not trust an at-home device that did not measure both nasal (and/or oral) airflow _and_ blood oxygen. Unfortunately, it seems that many at-home sleep test devices are only [watches](https://www.youtube.com/watch?v=PVyvWqhKArg), rings, or iPhone apps; they do not measure airflow via nasal cannula. The WatchPAT ONE in particular is [widely prescribed](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8883090/) and [marketed as an accurate at-home test](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7052958/) but is actually only [61% accurate in classifying normal/mild/moderate/severe OSA](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8883090/), likely because it does not measure nasal airflow.^[Perhaps there will be more research into improving the WatchPAT ONE's accuracy by gathering more paired watch oximeter and nasal airflow data and improving machine learning models that can infer the latter based on the former; until then, I'd rather trust devices that measure nasal airflow.]
 3. _There may be better at-home sleep test solutions out there._ [SleepData](https://www.sleepdata.com/) and [the SLP SleepStrip (now ApneaStrip)](https://sleepsense.com/shop/apneastrip/) may be better; I haven't researched them yet.
+
+## Footnotes

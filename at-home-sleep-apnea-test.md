@@ -1,3 +1,5 @@
+# At-home sleep apnea test
+
 tl;dr: For sleep apnea, I think I found a \~\$200 ownable at-home test
 that measures most of what is measured in more expensive in-lab sleep
 studies.
@@ -79,6 +81,8 @@ Some caveats:
     [SleepData](https://www.sleepdata.com/) and [the SLP SleepStrip (now
     ApneaStrip)](https://sleepsense.com/shop/apneastrip/) may be better;
     I haven’t researched them yet.
+
+## Footnotes
 
 [^1]: I talked to three friends who got sleep studies done. Two paid
     thousands of dollars with insurance while one got it essentially for
