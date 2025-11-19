@@ -1,4 +1,8 @@
-# About me
+---
+layout: page
+title: About me
+permalink: /about/
+---
 
 <img src="/assets/about_headshot.jpg" width="200" align="right" style="margin: -50px 0px 20px 40px">
 
