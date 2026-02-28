@@ -114,6 +114,7 @@ if (!require(tidyr))     install.packages("tidyr",     repos="https://cloud.r-pr
 if (!require(ggrepel))   install.packages("ggrepel",   repos="https://cloud.r-project.org")
 if (!require(scales))    install.packages("scales",    repos="https://cloud.r-project.org")
 if (!require(patchwork)) install.packages("patchwork",  repos="https://cloud.r-project.org")
+setwd("/Users/abl19/Code_not_Dropbox/abliu.github.io/")
 
 library(ggplot2)
 library(dplyr)
@@ -146,236 +147,7 @@ library(patchwork)
 # from published figures. These are noted with comments.
 # ==============================================================================
 
-data_raw <- tribble(
-  ~study, ~arm, ~arm_type, ~month, ~score_raw, ~scale_max, ~invert, ~outcome_measure, ~condition, ~platform, ~intervention_type, ~severity,
-  
-  # ============================================================================
-  # 1. Allen et al. 2016/2018 - OA Knee - WOMAC total (0-96, higher=worse)
-  #    3-arm: Wait list control, PT (physical therapy), Web (IBET)
-  #    Timepoints: 0, 4, 12 months
-  #    Data from published figure (your uploaded image) and paper tables
-  # ============================================================================
-  "Allen 2016", "Wait List",    "Control",      0,  33.5, 96, FALSE, "WOMAC Total", "Knee OA",        "None",    "Wait List",          "Moderate",
-  "Allen 2016", "Wait List",    "Control",      4,  29.3, 96, FALSE, "WOMAC Total", "Knee OA",        "None",    "Wait List",          "Moderate",
-  "Allen 2016", "Wait List",    "Control",     12,  29.8, 96, FALSE, "WOMAC Total", "Knee OA",        "None",    "Wait List",          "Moderate",
-  "Allen 2016", "PT",           "Active Control", 0,  32.0, 96, FALSE, "WOMAC Total", "Knee OA",      "In-person","Physical Therapy",   "Moderate",
-  "Allen 2016", "PT",           "Active Control", 4,  24.7, 96, FALSE, "WOMAC Total", "Knee OA",      "In-person","Physical Therapy",   "Moderate",
-  "Allen 2016", "PT",           "Active Control",12,  27.0, 96, FALSE, "WOMAC Total", "Knee OA",      "In-person","Physical Therapy",   "Moderate",
-  "Allen 2016", "Web (IBET)",   "Digital",       0,  31.0, 96, FALSE, "WOMAC Total", "Knee OA",       "Website", "Web Exercise",       "Moderate",
-  "Allen 2016", "Web (IBET)",   "Digital",       4,  24.9, 96, FALSE, "WOMAC Total", "Knee OA",       "Website", "Web Exercise",       "Moderate",
-  "Allen 2016", "Web (IBET)",   "Digital",      12,  25.6, 96, FALSE, "WOMAC Total", "Knee OA",       "Website", "Web Exercise",       "Moderate",
-  
-  # ============================================================================
-  # 2. Bennell et al. 2017 - Chronic Knee Pain - NRS Pain (0-10)
-  #    2-arm: Internet-delivered pain coping skills (PCST) + PT vs PT + web education
-  #    Timepoints: 0, 3, 6, 9 months
-  # ============================================================================
-  "Bennell 2017", "PCST+PT (Digital)", "Digital",       0, 5.3, 10, FALSE, "NRS Pain", "Knee OA",      "Website", "Web CBT + PT",       "Moderate",
-  "Bennell 2017", "PCST+PT (Digital)", "Digital",       3, 3.7, 10, FALSE, "NRS Pain", "Knee OA",      "Website", "Web CBT + PT",       "Moderate",
-  "Bennell 2017", "PCST+PT (Digital)", "Digital",       6, 3.8, 10, FALSE, "NRS Pain", "Knee OA",      "Website", "Web CBT + PT",       "Moderate",
-  "Bennell 2017", "PCST+PT (Digital)", "Digital",       9, 4.2, 10, FALSE, "NRS Pain", "Knee OA",      "Website", "Web CBT + PT",       "Moderate",
-  "Bennell 2017", "PT + Education",    "Active Control",0, 5.5, 10, FALSE, "NRS Pain", "Knee OA",      "In-person","PT + Web Education", "Moderate",
-  "Bennell 2017", "PT + Education",    "Active Control",3, 4.5, 10, FALSE, "NRS Pain", "Knee OA",      "In-person","PT + Web Education", "Moderate",
-  "Bennell 2017", "PT + Education",    "Active Control",6, 4.6, 10, FALSE, "NRS Pain", "Knee OA",      "In-person","PT + Web Education", "Moderate",
-  "Bennell 2017", "PT + Education",    "Active Control",9, 4.6, 10, FALSE, "NRS Pain", "Knee OA",      "In-person","PT + Web Education", "Moderate",
-  
-  # ============================================================================
-  # 3. Bennell et al. 2016 - Hip OA - NRS Pain (0-10)
-  #    2-arm: Internet PT (physio + web pain coping) vs sham internet + sham physio
-  #    Timepoints: 0, 3, 9 months
-  # ============================================================================
-  "Bennell 2016", "Web PT+Coping",  "Digital",       0, 6.0, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Web PT + Coping",    "Moderate-Severe",
-  "Bennell 2016", "Web PT+Coping",  "Digital",       3, 4.3, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Web PT + Coping",    "Moderate-Severe",
-  "Bennell 2016", "Web PT+Coping",  "Digital",       9, 4.8, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Web PT + Coping",    "Moderate-Severe",
-  "Bennell 2016", "Sham Control",   "Control",       0, 5.9, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Sham Internet",      "Moderate-Severe",
-  "Bennell 2016", "Sham Control",   "Control",       3, 5.4, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Sham Internet",      "Moderate-Severe",
-  "Bennell 2016", "Sham Control",   "Control",       9, 5.2, 10, FALSE, "NRS Pain", "Hip OA",         "Website", "Sham Internet",      "Moderate-Severe",
-  
-  # ============================================================================
-  # 4. Bossen et al. 2013 - Hip/Knee OA - WOMAC function (0-68) & pain VAS (0-10)
-  #    2-arm: Web-based PA intervention "Join2move" vs wait list
-  #    Timepoints: 0, 3, 12 months
-  # ============================================================================
-  "Bossen 2013", "Join2move (Web)", "Digital",  0, 28.4, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "Website", "Web PA Program",     "Moderate",
-  "Bossen 2013", "Join2move (Web)", "Digital",  3, 24.5, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "Website", "Web PA Program",     "Moderate",
-  "Bossen 2013", "Join2move (Web)", "Digital", 12, 26.1, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "Website", "Web PA Program",     "Moderate",
-  "Bossen 2013", "Wait List",       "Control",  0, 26.1, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "None",    "Wait List",          "Moderate",
-  "Bossen 2013", "Wait List",       "Control",  3, 25.0, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "None",    "Wait List",          "Moderate",
-  "Bossen 2013", "Wait List",       "Control", 12, 25.8, 68, FALSE, "WOMAC Function", "Hip/Knee OA",  "None",    "Wait List",          "Moderate",
-
-  # ============================================================================
-  # 5. Buhrman et al. 2011 - Chronic LBP - CPAQ pain (derived), CSQ catastrophizing
-  #    Web-based CBT vs wait list. Duration: ~2 months
-  #    Pain: MPI pain severity (0-6 scale) at 0, 2.5 months
-  # ============================================================================
-  "Buhrman 2011", "Web CBT",    "Digital",  0, 3.7, 6, FALSE, "MPI Pain Severity", "Chronic LBP",   "Website", "Web CBT",            "Moderate",
-  "Buhrman 2011", "Web CBT",    "Digital",  2.5, 3.5, 6, FALSE, "MPI Pain Severity", "Chronic LBP", "Website", "Web CBT",            "Moderate",
-  "Buhrman 2011", "Wait List",  "Control",  0, 3.9, 6, FALSE, "MPI Pain Severity", "Chronic LBP",   "None",    "Wait List",          "Moderate",
-  "Buhrman 2011", "Wait List",  "Control",  2.5, 3.8, 6, FALSE, "MPI Pain Severity", "Chronic LBP", "None",    "Wait List",          "Moderate",
-  
-  # ============================================================================
-  # 6. Calner/Nordin 2015/2016 - Chronic MSK Pain - NRS Pain (0-10)
-  #    MMR + Web program vs MMR alone. Duration: 4 months + 12mo follow-up
-  # ============================================================================
-  "Calner 2015", "MMR + Web",   "Digital",  0, 6.5, 10, FALSE, "NRS Pain", "Chronic MSK Pain",  "Website", "Web + MMR",          "Moderate-Severe",
-  "Calner 2015", "MMR + Web",   "Digital",  4, 4.7, 10, FALSE, "NRS Pain", "Chronic MSK Pain",  "Website", "Web + MMR",          "Moderate-Severe",
-  "Calner 2015", "MMR + Web",   "Digital", 12, 5.3, 10, FALSE, "NRS Pain", "Chronic MSK Pain",  "Website", "Web + MMR",          "Moderate-Severe",
-  "Calner 2015", "MMR Only",    "Active Control", 0, 6.2, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "In-person","MMR Only",       "Moderate-Severe",
-  "Calner 2015", "MMR Only",    "Active Control", 4, 5.0, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "In-person","MMR Only",       "Moderate-Severe",
-  "Calner 2015", "MMR Only",    "Active Control",12, 5.1, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "In-person","MMR Only",       "Moderate-Severe",
-  
-  # ============================================================================
-  # 7. Carpenter et al. 2012 - Chronic LBP - RMDQ (0-24) 
-  #    Web CBT "Wellness Workbook" vs wait list. Timepoints: 0, 0.75 (3wk), ~1mo
-  # ============================================================================
-  "Carpenter 2012", "Web CBT",   "Digital",  0, 10.1, 24, FALSE, "RMDQ", "Chronic LBP",   "Website", "Web CBT",            "Mild-Moderate",
-  "Carpenter 2012", "Web CBT",   "Digital",  0.75, 7.0, 24, FALSE, "RMDQ", "Chronic LBP", "Website", "Web CBT",            "Mild-Moderate",
-  "Carpenter 2012", "Wait List", "Control",  0, 10.7, 24, FALSE, "RMDQ", "Chronic LBP",   "None",    "Wait List",          "Mild-Moderate",
-  "Carpenter 2012", "Wait List", "Control",  0.75, 10.2, 24, FALSE, "RMDQ", "Chronic LBP","None",    "Wait List",          "Mild-Moderate",
-  
-  # ============================================================================
-  # 8. Chhabra et al. 2018 - Chronic LBP - ODI (0-100) & VAS Pain (0-10)
-  #    App-based self-management vs standard care. Timepoints: 0, 3, 6 months
-  # ============================================================================
-  "Chhabra 2018", "App",          "Digital",  0, 40.0, 100, FALSE, "ODI", "Chronic LBP",    "App",     "App Self-Management","Moderate",
-  "Chhabra 2018", "App",          "Digital",  3, 23.2, 100, FALSE, "ODI", "Chronic LBP",    "App",     "App Self-Management","Moderate",
-  "Chhabra 2018", "App",          "Digital",  6, 18.5, 100, FALSE, "ODI", "Chronic LBP",    "App",     "App Self-Management","Moderate",
-  "Chhabra 2018", "Standard Care","Control",  0, 39.0, 100, FALSE, "ODI", "Chronic LBP",    "None",    "Standard Care",     "Moderate",
-  "Chhabra 2018", "Standard Care","Control",  3, 33.6, 100, FALSE, "ODI", "Chronic LBP",    "None",    "Standard Care",     "Moderate",
-  "Chhabra 2018", "Standard Care","Control",  6, 31.8, 100, FALSE, "ODI", "Chronic LBP",    "None",    "Standard Care",     "Moderate",
-  
-  # ============================================================================
-  # 9. Chiauzzi et al. 2010 - Chronic LBP - BPI Pain Severity (0-10)
-  #    Web "painACTION-Back" vs usual care. Timepoints: 0, 1, 2, 4 months
-  # ============================================================================
-  "Chiauzzi 2010", "painACTION",  "Digital",  0, 5.1, 10, FALSE, "BPI Pain", "Chronic LBP",  "Website", "Web Education",      "Moderate",
-  "Chiauzzi 2010", "painACTION",  "Digital",  1, 4.6, 10, FALSE, "BPI Pain", "Chronic LBP",  "Website", "Web Education",      "Moderate",
-  "Chiauzzi 2010", "painACTION",  "Digital",  2, 4.7, 10, FALSE, "BPI Pain", "Chronic LBP",  "Website", "Web Education",      "Moderate",
-  "Chiauzzi 2010", "painACTION",  "Digital",  4, 4.8, 10, FALSE, "BPI Pain", "Chronic LBP",  "Website", "Web Education",      "Moderate",
-  "Chiauzzi 2010", "Usual Care",  "Control",  0, 5.2, 10, FALSE, "BPI Pain", "Chronic LBP",  "None",    "Usual Care",        "Moderate",
-  "Chiauzzi 2010", "Usual Care",  "Control",  1, 4.8, 10, FALSE, "BPI Pain", "Chronic LBP",  "None",    "Usual Care",        "Moderate",
-  "Chiauzzi 2010", "Usual Care",  "Control",  2, 4.9, 10, FALSE, "BPI Pain", "Chronic LBP",  "None",    "Usual Care",        "Moderate",
-  "Chiauzzi 2010", "Usual Care",  "Control",  4, 4.9, 10, FALSE, "BPI Pain", "Chronic LBP",  "None",    "Usual Care",        "Moderate",
-  
-  # ============================================================================
-  # 10. Del Pozo-Cruz et al. 2012/2013 - LBP (office workers) - VAS Pain (0-100)
-  #     Web-based exercise program vs usual care. Timepoints: 0, 9 months
-  # ============================================================================
-  "Del Pozo-Cruz 2012", "Web Exercise",  "Digital",  0, 42.0, 100, FALSE, "VAS Pain", "LBP",       "Website", "Web Exercise",       "Mild-Moderate",
-  "Del Pozo-Cruz 2012", "Web Exercise",  "Digital",  9, 24.0, 100, FALSE, "VAS Pain", "LBP",       "Website", "Web Exercise",       "Mild-Moderate",
-  "Del Pozo-Cruz 2012", "Usual Care",    "Control",  0, 39.0, 100, FALSE, "VAS Pain", "LBP",       "None",    "Usual Care",        "Mild-Moderate",
-  "Del Pozo-Cruz 2012", "Usual Care",    "Control",  9, 45.0, 100, FALSE, "VAS Pain", "LBP",       "None",    "Usual Care",        "Mild-Moderate",
-  
-  # ============================================================================
-  # 11. Irvine et al. 2015 - LBP - RMDQ (0-24)
-  #     3-arm: FitBack app vs Alternative care (emails) vs Control
-  #     Timepoints: 0, 2, 4 months
-  #     Data from paper Table 3: RMDQ means
-  # ============================================================================
-  "Irvine 2015", "FitBack (App)", "Digital",  0, 7.7, 24, FALSE, "RMDQ", "LBP",            "App",     "App Self-Management","Mild-Moderate",
-  "Irvine 2015", "FitBack (App)", "Digital",  2, 5.6, 24, FALSE, "RMDQ", "LBP",            "App",     "App Self-Management","Mild-Moderate",
-  "Irvine 2015", "FitBack (App)", "Digital",  4, 4.9, 24, FALSE, "RMDQ", "LBP",            "App",     "App Self-Management","Mild-Moderate",
-  "Irvine 2015", "Alt Care",      "Active Control", 0, 7.8, 24, FALSE, "RMDQ", "LBP",      "Website", "Email + Web Links",  "Mild-Moderate",
-  "Irvine 2015", "Alt Care",      "Active Control", 2, 5.9, 24, FALSE, "RMDQ", "LBP",      "Website", "Email + Web Links",  "Mild-Moderate",
-  "Irvine 2015", "Alt Care",      "Active Control", 4, 5.6, 24, FALSE, "RMDQ", "LBP",      "Website", "Email + Web Links",  "Mild-Moderate",
-  "Irvine 2015", "Control",       "Control",  0, 8.0, 24, FALSE, "RMDQ", "LBP",            "None",    "Assessment Only",   "Mild-Moderate",
-  "Irvine 2015", "Control",       "Control",  2, 6.7, 24, FALSE, "RMDQ", "LBP",            "None",    "Assessment Only",   "Mild-Moderate",
-  "Irvine 2015", "Control",       "Control",  4, 6.2, 24, FALSE, "RMDQ", "LBP",            "None",    "Assessment Only",   "Mild-Moderate",
-  
-  # ============================================================================
-  # 12. Krein et al. 2013 - Chronic LBP - RMDQ (0-24)
-  #     Web + pedometer intervention vs usual care. Timepoints: 0, 6, 12 months
-  # ============================================================================
-  "Krein 2013", "Web + Pedometer", "Digital",  0, 12.1, 24, FALSE, "RMDQ", "Chronic LBP",   "Website", "Web + Pedometer",    "Moderate",
-  "Krein 2013", "Web + Pedometer", "Digital",  6, 9.4, 24, FALSE, "RMDQ", "Chronic LBP",    "Website", "Web + Pedometer",    "Moderate",
-  "Krein 2013", "Web + Pedometer", "Digital", 12, 10.1, 24, FALSE, "RMDQ", "Chronic LBP",   "Website", "Web + Pedometer",    "Moderate",
-  "Krein 2013", "Usual Care",      "Control",  0, 12.3, 24, FALSE, "RMDQ", "Chronic LBP",   "None",    "Usual Care",        "Moderate",
-  "Krein 2013", "Usual Care",      "Control",  6, 11.1, 24, FALSE, "RMDQ", "Chronic LBP",   "None",    "Usual Care",        "Moderate",
-  "Krein 2013", "Usual Care",      "Control", 12, 11.5, 24, FALSE, "RMDQ", "Chronic LBP",   "None",    "Usual Care",        "Moderate",
-  
-  # ============================================================================
-  # 13. Marangoni 2010 - MSK Pain (neck/shoulder) - VAS Pain (0-100mm)
-  #     3-arm: Computer stretching (CASP) vs printed stretching (FLIP) vs control
-  #     Timepoints: 0, 1 month (4 weeks)
-  # ============================================================================
-  "Marangoni 2010", "Computer Stretch", "Digital",  0, 46.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)", "Software","Computer Stretching","Mild-Moderate",
-  "Marangoni 2010", "Computer Stretch", "Digital",  1, 25.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)", "Software","Computer Stretching","Mild-Moderate",
-  "Marangoni 2010", "Print Stretch",    "Active Control",0, 44.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)","Print",  "Printed Stretching","Mild-Moderate",
-  "Marangoni 2010", "Print Stretch",    "Active Control",1, 32.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)","Print",  "Printed Stretching","Mild-Moderate",
-  "Marangoni 2010", "Control",          "Control",  0, 47.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)", "None",    "No Intervention",   "Mild-Moderate",
-  "Marangoni 2010", "Control",          "Control",  1, 39.0, 100, FALSE, "VAS Pain", "MSK Pain (Neck)", "None",    "No Intervention",   "Mild-Moderate",
-  
-  # ============================================================================
-  # 14. Mecklenburg et al. 2018 - Knee Pain - KOOS Pain (0-100, 100=best)
-  #     App (Hinge Health) + coach vs education control. Timepoints: 0, 3 months
-  # ============================================================================
-  "Mecklenburg 2018", "App (Hinge)",  "Digital",  0, 57.0, 100, TRUE, "KOOS Pain", "Knee Pain",   "App",     "App + Coach",        "Moderate",
-  "Mecklenburg 2018", "App (Hinge)",  "Digital",  3, 74.0, 100, TRUE, "KOOS Pain", "Knee Pain",   "App",     "App + Coach",        "Moderate",
-  "Mecklenburg 2018", "Education",    "Control",  0, 56.0, 100, TRUE, "KOOS Pain", "Knee Pain",   "None",    "Education Control",  "Moderate",
-  "Mecklenburg 2018", "Education",    "Control",  3, 60.0, 100, TRUE, "KOOS Pain", "Knee Pain",   "None",    "Education Control",  "Moderate",
-  
-  # ============================================================================
-  # 15. Peters et al. 2017 - Chronic MSK Pain - NRS Pain (0-10)
-  #     3-arm: iCBT vs Positive Psychology (PPI) vs Wait list
-  #     Timepoints: 0, 2, 5 months
-  # ============================================================================
-  "Peters 2017", "iCBT (Web)",    "Digital",  0, 5.7, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Web CBT",            "Moderate",
-  "Peters 2017", "iCBT (Web)",    "Digital",  2, 5.2, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Web CBT",            "Moderate",
-  "Peters 2017", "iCBT (Web)",    "Digital",  5, 5.4, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Web CBT",            "Moderate",
-  "Peters 2017", "PPI (Web)",     "Digital",  0, 5.8, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Positive Psychology", "Moderate",
-  "Peters 2017", "PPI (Web)",     "Digital",  2, 5.5, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Positive Psychology", "Moderate",
-  "Peters 2017", "PPI (Web)",     "Digital",  5, 5.4, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "Website", "Positive Psychology", "Moderate",
-  "Peters 2017", "Wait List",     "Control",  0, 5.5, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "None",    "Wait List",          "Moderate",
-  "Peters 2017", "Wait List",     "Control",  2, 5.6, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "None",    "Wait List",          "Moderate",
-  "Peters 2017", "Wait List",     "Control",  5, 5.5, 10, FALSE, "NRS Pain", "Chronic MSK Pain", "None",    "Wait List",          "Moderate",
-  
-  # ============================================================================
-  # 16. Petrozzi et al. 2019 - Chronic LBP - NRS Pain (0-10)
-  #     MoodGYM (web CBT) + usual PT vs usual PT. Timepoints: 0, 2, 6 months
-  # ============================================================================
-  "Petrozzi 2019", "MoodGYM + PT",  "Digital",  0, 4.3, 10, FALSE, "NRS Pain", "Chronic LBP",   "Website", "Web CBT + PT",       "Mild-Moderate",
-  "Petrozzi 2019", "MoodGYM + PT",  "Digital",  2, 3.1, 10, FALSE, "NRS Pain", "Chronic LBP",   "Website", "Web CBT + PT",       "Mild-Moderate",
-  "Petrozzi 2019", "MoodGYM + PT",  "Digital",  6, 3.0, 10, FALSE, "NRS Pain", "Chronic LBP",   "Website", "Web CBT + PT",       "Mild-Moderate",
-  "Petrozzi 2019", "PT Only",       "Active Control", 0, 4.5, 10, FALSE, "NRS Pain", "Chronic LBP", "In-person","PT Only",         "Mild-Moderate",
-  "Petrozzi 2019", "PT Only",       "Active Control", 2, 3.2, 10, FALSE, "NRS Pain", "Chronic LBP", "In-person","PT Only",         "Mild-Moderate",
-  "Petrozzi 2019", "PT Only",       "Active Control", 6, 3.2, 10, FALSE, "NRS Pain", "Chronic LBP", "In-person","PT Only",         "Mild-Moderate",
-  
-  # ============================================================================
-  # 17. Shebib et al. 2019 - Chronic LBP - VAS Pain (0-10)
-  #     App (Kaia) + usual care vs usual care alone. Timepoints: 0, 3 months
-  # ============================================================================
-  "Shebib 2019", "App (Kaia)",   "Digital",  0, 5.1, 10, FALSE, "VAS Pain", "Chronic LBP",    "App",     "App Exercise + CBT", "Moderate",
-  "Shebib 2019", "App (Kaia)",   "Digital",  3, 3.0, 10, FALSE, "VAS Pain", "Chronic LBP",    "App",     "App Exercise + CBT", "Moderate",
-  "Shebib 2019", "Usual Care",   "Control",  0, 4.8, 10, FALSE, "VAS Pain", "Chronic LBP",    "None",    "Usual Care",        "Moderate",
-  "Shebib 2019", "Usual Care",   "Control",  3, 4.3, 10, FALSE, "VAS Pain", "Chronic LBP",    "None",    "Usual Care",        "Moderate",
-  
-  # ============================================================================
-  # 18. Toelle et al. 2019 - Chronic LBP - VAS Pain (0-10)
-  #     App (Kaia) vs web-based exercise + education. 3 months duration
-  #     Timepoints: 0, 1.5, 3 months
-  # ============================================================================
-  "Toelle 2019", "App (Kaia)",      "Digital",  0, 4.8, 10, FALSE, "VAS Pain", "Chronic LBP",  "App",     "App Exercise + CBT", "Moderate",
-  "Toelle 2019", "App (Kaia)",      "Digital",  1.5, 3.0, 10, FALSE, "VAS Pain", "Chronic LBP","App",     "App Exercise + CBT", "Moderate",
-  "Toelle 2019", "App (Kaia)",      "Digital",  3, 2.8, 10, FALSE, "VAS Pain", "Chronic LBP",  "App",     "App Exercise + CBT", "Moderate",
-  "Toelle 2019", "Web Exercise",    "Active Control", 0, 4.7, 10, FALSE, "VAS Pain", "Chronic LBP","Website","Web Exercise",     "Moderate",
-  "Toelle 2019", "Web Exercise",    "Active Control", 1.5, 3.8, 10, FALSE, "VAS Pain", "Chronic LBP","Website","Web Exercise",   "Moderate",
-  "Toelle 2019", "Web Exercise",    "Active Control", 3, 3.5, 10, FALSE, "VAS Pain", "Chronic LBP","Website","Web Exercise",     "Moderate",
-  
-  # ============================================================================
-  # 19. Van den Heuvel et al. 2003 - Neck/Upper Limb (work-related) 
-  #     3-arm: Software breaks+exercise vs Software breaks only vs No intervention
-  #     NRS Pain (0-10). Timepoints: 0, 2, 8 months
-  # ============================================================================
-  "Van den Heuvel 2003", "Software+Exercise","Digital",  0, 3.4, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "Software","Software Breaks+Ex","Mild",
-  "Van den Heuvel 2003", "Software+Exercise","Digital",  2, 2.9, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "Software","Software Breaks+Ex","Mild",
-  "Van den Heuvel 2003", "Software+Exercise","Digital",  8, 2.6, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "Software","Software Breaks+Ex","Mild",
-  "Van den Heuvel 2003", "Software Breaks",  "Active Control", 0, 3.3, 10, FALSE, "NRS Pain", "Neck/Upper Limb","Software","Software Breaks", "Mild",
-  "Van den Heuvel 2003", "Software Breaks",  "Active Control", 2, 3.1, 10, FALSE, "NRS Pain", "Neck/Upper Limb","Software","Software Breaks", "Mild",
-  "Van den Heuvel 2003", "Software Breaks",  "Active Control", 8, 2.8, 10, FALSE, "NRS Pain", "Neck/Upper Limb","Software","Software Breaks", "Mild",
-  "Van den Heuvel 2003", "No Intervention",  "Control",  0, 3.5, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "None",    "No Intervention",   "Mild",
-  "Van den Heuvel 2003", "No Intervention",  "Control",  2, 3.3, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "None",    "No Intervention",   "Mild",
-  "Van den Heuvel 2003", "No Intervention",  "Control",  8, 3.2, 10, FALSE, "NRS Pain", "Neck/Upper Limb", "None",    "No Intervention",   "Mild"
-)
+data_raw <- read_csv("_scripts/raw_pt_study_data.csv")
 
 # ==============================================================================
 # NORMALIZE TO 0-100 SCALE
@@ -392,8 +164,6 @@ data <- data_raw %>%
 data <- data %>%
   mutate(
     line_id = paste(study, arm, sep = " | "),
-    # Simplify arm_type for coloring
-    arm_color = factor(arm_type, levels = c("Digital", "Active Control", "Control")),
     # Broad condition category
     condition_cat = case_when(
       grepl("Knee|Hip", condition) ~ "OA (Knee/Hip)",
@@ -403,16 +173,38 @@ data <- data %>%
       TRUE ~ "Other MSK"
     ),
     condition_cat = factor(condition_cat, levels = c(
-      "OA (Knee/Hip)", "LBP (Acute/Subacute)", "Chronic LBP", 
+      "OA (Knee/Hip)", "LBP (Acute/Subacute)", "Chronic LBP",
       "Chronic MSK Pain", "Other MSK"
     )),
-    # Platform category
-    platform_cat = case_when(
-      platform == "App" ~ "App",
-      platform %in% c("Website", "Software") ~ "Web/Software",
-      platform == "In-person" ~ "In-Person PT",
-      TRUE ~ "No Intervention"
-    )
+    # Combined intervention category
+    intervention_cat = case_when(
+      # Digital + PT combinations
+      line_id == "Bennell 2017 | PCST+PT (Digital)" ~ "Digital + PT",
+      line_id == "Petrozzi 2019 | MoodGYM + PT"     ~ "Digital + PT",
+      line_id == "Calner 2015 | MMR + Web"           ~ "Digital + PT",
+      line_id == "Toelle 2019 | Web Exercise"        ~ "Digital + PT",
+      # In-person PT
+      line_id == "Allen 2016 | PT"                   ~ "In-person PT",
+      line_id == "Petrozzi 2019 | PT Only"           ~ "In-person PT",
+      line_id == "Bennell 2017 | PT + Education"     ~ "In-person PT",
+      line_id == "Calner 2015 | MMR Only"            ~ "In-person PT",
+      # Usual care
+      line_id == "Chhabra 2018 | Standard Care"      ~ "Usual Care",
+      line_id == "Chiauzzi 2010 | Usual Care"        ~ "Usual Care",
+      line_id == "Del Pozo-Cruz 2012 | Usual Care"   ~ "Usual Care",
+      line_id == "Krein 2013 | Usual Care"            ~ "Usual Care",
+      line_id == "Shebib 2019 | Usual Care"           ~ "Usual Care",
+      line_id == "Mecklenburg 2018 | Education"       ~ "Usual Care",
+      line_id == "Irvine 2015 | Alt Care"             ~ "Usual Care",
+      line_id == "Marangoni 2010 | Print Stretch"     ~ "Usual Care",
+      # Wait List / No Treatment
+      arm_type == "Control" & grepl("Wait|No Intervention|Assessment|Control$", arm) ~ "Wait List/No Treatment",
+      # Everything else is Digital
+      TRUE ~ "Digital"
+    ),
+    intervention_cat = factor(intervention_cat, levels = c(
+      "Digital", "Digital + PT", "In-person PT", "Usual Care", "Wait List/No Treatment"
+    ))
   )
 
 # ==============================================================================
@@ -425,34 +217,44 @@ label_data <- data %>%
   filter(month == max(month)) %>%
   ungroup()
 
-# Color palette
-arm_colors <- c(
-  "Digital"        = "#2166AC",  # Blue
-  "Active Control" = "#F4A582",  # Salmon
-  "Control"        = "#B2182B"   # Red
+# Color palette for intervention category (used in p_effects)
+intervention_colors <- c(
+  "Digital"                = "#2166AC",  # Blue
+  "Digital + PT"           = "#7FCDBB",  # Teal
+  "In-person PT"           = "#F4A582",  # Salmon
+  "Usual Care"             = "#B2182B",  # Red
+  "Wait List/No Treatment" = "#999999"   # Grey
 )
 
-# Linetype by condition
-condition_lines <- c(
-  "OA (Knee/Hip)"        = "solid",
-  "LBP (Acute/Subacute)" = "dashed",
-  "Chronic LBP"          = "dotted",
-  "Chronic MSK Pain"     = "dotdash",
-  "Other MSK"            = "longdash"
+# Linetype by intervention category (used in p_main)
+intervention_lines <- c(
+  "Digital"                = "solid",
+  "Digital + PT"           = "dashed",
+  "In-person PT"           = "dotted",
+  "Usual Care"             = "dotdash",
+  "Wait List/No Treatment" = "longdash"
 )
 
-# Shape by platform
-platform_shapes <- c(
-  "App"              = 17, # triangle
-  "Web/Software"     = 16, # filled circle
-  "In-Person PT"     = 15, # filled square
-  "No Intervention"  = 1   # open circle
+# Color palette for studies (used in p_main) — 18 distinct colors
+studies <- sort(unique(data$study))
+study_colors <- setNames(
+  c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#A65628",
+    "#F781BF", "#999999", "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
+    "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3", "#1B9E77", "#D95F02"),
+  studies
 )
+
+# Point shapes for studies (used in p_effects) — shapes 0–17
+study_shapes <- setNames(0:(length(studies) - 1), studies)
+
+# ==============================================================================
+# MAIN PLOT: All studies overlaid, colored by study, linetype by intervention
+# ==============================================================================
 
 p_main <- ggplot(data, aes(x = month, y = score_normalized,
-                            group = line_id, color = arm_color)) +
-  geom_line(aes(linetype = condition_cat), linewidth = 0.7, alpha = 0.7) +
-  geom_point(aes(shape = platform_cat), size = 2.2, alpha = 0.8) +
+                            group = line_id, color = study)) +
+  geom_line(aes(linetype = intervention_cat), linewidth = 0.7, alpha = 0.7) +
+  geom_point(size = 2.2, alpha = 0.8) +
   geom_text_repel(
     data = label_data,
     aes(label = paste0(study, "\n", arm)),
@@ -463,16 +265,12 @@ p_main <- ggplot(data, aes(x = month, y = score_normalized,
     show.legend = FALSE
   ) +
   scale_color_manual(
-    values = arm_colors,
-    name = "Arm Type"
+    values = study_colors,
+    name = "Study"
   ) +
   scale_linetype_manual(
-    values = condition_lines,
-    name = "Condition"
-  ) +
-  scale_shape_manual(
-    values = platform_shapes,
-    name = "Platform"
+    values = intervention_lines,
+    name = "Intervention"
   ) +
   scale_x_continuous(
     breaks = c(0, 1, 2, 3, 4, 5, 6, 8, 9, 12),
@@ -485,9 +283,9 @@ p_main <- ggplot(data, aes(x = month, y = score_normalized,
   ) +
   labs(
     title = "Digital Health Interventions for Musculoskeletal Conditions",
-    subtitle = "Outcome trajectories from 19 RCTs (Hewitt et al. 2020 review)\nScores normalized to 0–100 scale across different instruments",
+    subtitle = "Outcome trajectories from 18 RCTs (Hewitt et al. 2020 review)\nScores normalized to 0-100 scale across different instruments",
     caption = paste0(
-      "Studies: Allen, Bennell (×2), Bossen, Buhrman, Calner/Nordin, Carpenter, Chhabra, Chiauzzi,\n",
+      "Studies: Allen, Bennell 2017, Bossen, Buhrman, Calner/Nordin, Carpenter, Chhabra, Chiauzzi,\n",
       "Del Pozo-Cruz, Irvine, Krein, Marangoni, Mecklenburg, Peters, Petrozzi, Shebib, Toelle, Van den Heuvel\n",
       "Instruments normalized: WOMAC, NRS, VAS, RMDQ, ODI, KOOS, MPI, BPI"
     )
@@ -505,54 +303,78 @@ p_main <- ggplot(data, aes(x = month, y = score_normalized,
     plot.margin = margin(10, 10, 10, 10)
   ) +
   guides(
-    color = guide_legend(order = 1),
-    linetype = guide_legend(order = 2),
-    shape = guide_legend(order = 3)
+    color = guide_legend(order = 1, ncol = 1),
+    linetype = guide_legend(order = 2)
   )
 
 # ==============================================================================
-# FACETED VERSION: By condition category
+# EFFECTS PLOT: Change from baseline, colored by intervention, shape by study
 # ==============================================================================
 
-p_faceted <- ggplot(data, aes(x = month, y = score_normalized,
-                               group = line_id, color = arm_color)) +
-  geom_line(linewidth = 0.8, alpha = 0.75) +
-  geom_point(aes(shape = platform_cat), size = 2.5, alpha = 0.85) +
+# Compute score relative to baseline for each study-arm
+data_effects <- data %>%
+  group_by(line_id) %>%
+  mutate(score_diff = score_normalized - score_normalized[month == min(month)]) %>%
+  ungroup()
+
+label_data_effects <- data_effects %>%
+  group_by(line_id) %>%
+  filter(month == max(month)) %>%
+  ungroup()
+
+p_effects <- ggplot(data_effects, aes(x = month, y = score_diff,
+                                       group = line_id, color = intervention_cat)) +
+  geom_hline(yintercept = 0, linewidth = 0.4, color = "grey50", linetype = "dashed") +
+  geom_line(linewidth = 0.7, alpha = 0.7) +
+  geom_point(aes(shape = study), size = 2.2, alpha = 0.8) +
   geom_text_repel(
-    data = label_data,
+    data = label_data_effects,
     aes(label = paste0(study, "\n", arm)),
-    size = 2.0, lineheight = 0.85,
-    nudge_x = 0.3, direction = "y",
+    size = 2.2, lineheight = 0.85,
+    nudge_x = 0.5, direction = "y",
     segment.size = 0.3, segment.alpha = 0.5,
-    max.overlaps = 20,
+    max.overlaps = 30,
     show.legend = FALSE
   ) +
-  facet_wrap(~ condition_cat, scales = "free_x", ncol = 3) +
   scale_color_manual(
-    values = arm_colors,
-    name = "Arm Type"
+    values = intervention_colors,
+    name = "Intervention"
   ) +
   scale_shape_manual(
-    values = platform_shapes,
-    name = "Platform"
+    values = study_shapes,
+    name = "Study"
+  ) +
+  scale_x_continuous(
+    breaks = c(0, 1, 2, 3, 4, 5, 6, 8, 9, 12),
+    limits = c(0, 14),
+    name = "Month"
   ) +
   scale_y_continuous(
-    limits = c(0, 75),
-    name = "Normalized Score (0-100)\n0 = No Pain/Disability"
+    name = "Change from Baseline (normalized points)\nNegative = Improvement"
   ) +
-  scale_x_continuous(name = "Month") +
   labs(
-    title = "Digital Health Interventions: Outcomes by Condition Type",
-    subtitle = "All 19 studies from Hewitt et al. (2020), faceted by musculoskeletal condition"
+    title = "Digital Health Interventions: Change from Baseline",
+    subtitle = "All lines start at 0; negative values indicate improvement",
+    caption = paste0(
+      "18 RCTs from Hewitt et al. (2020) review\n",
+      "Instruments normalized: WOMAC, NRS, VAS, RMDQ, ODI, KOOS, MPI, BPI"
+    )
   ) +
-  theme_minimal(base_size = 11) +
+  theme_minimal(base_size = 12) +
   theme(
     plot.title = element_text(face = "bold", size = 14),
     plot.subtitle = element_text(size = 10, color = "grey40"),
-    strip.text = element_text(face = "bold", size = 10),
-    legend.position = "bottom",
-    legend.box = "horizontal",
-    panel.grid.minor = element_blank()
+    plot.caption = element_text(size = 7, color = "grey50", hjust = 0),
+    legend.position = "right",
+    legend.box = "vertical",
+    legend.text = element_text(size = 9),
+    legend.title = element_text(size = 10, face = "bold"),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(10, 10, 10, 10)
+  ) +
+  guides(
+    color = guide_legend(order = 1),
+    shape = guide_legend(order = 2, ncol = 1)
   )
 
 # ==============================================================================
@@ -567,12 +389,15 @@ output_dir <- here("assets", "images")
 ggsave(file.path(output_dir, "digital_pt_all_studies_overlay.png"),
        p_main, width = 14, height = 9, dpi = 300, bg = "white")
 
-ggsave(file.path(output_dir, "digital_pt_by_condition.png"),
-       p_faceted, width = 16, height = 10, dpi = 300, bg = "white")
+ggsave(file.path(output_dir, "digital_pt_effects_from_baseline.png"),
+       p_effects, width = 14, height = 9, dpi = 300, bg = "white")
 
 cat("Plots saved successfully!\n")
-cat("  1. digital_pt_all_studies_overlay.png - All studies in one panel\n")
-cat("  2. digital_pt_by_condition.png - Faceted by condition type\n")
+cat("  1. digital_pt_all_studies_overlay.png - All studies, colored by study\n")
+cat("  2. digital_pt_effects_from_baseline.png - Change from baseline, colored by intervention\n")
+
+p_main
+p_effects
 
 # ==============================================================================
 # SUMMARY TABLE
@@ -591,3 +416,4 @@ summary_table <- data %>%
 
 cat("\n--- Summary of Normalized Changes ---\n")
 print(summary_table, n = 60)
+
