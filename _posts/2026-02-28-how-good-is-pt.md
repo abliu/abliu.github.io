@@ -64,7 +64,7 @@ Claude churned for 5 minutes and produced a 450-line R script and a beautiful (n
 
 I was ecstatic! Claude had extracted a bunch of results, treatment categories, and time points, and written all the rescaling and figure code. Most importantly, the figure looked great!
 
-I decided to check the data for one of the studies just to be sure, and found... the numbers were slightly off--3.3 vs 3.5, 3.1 vs. 3.3. I found that odd and checked another. Again, slightly off. I checked one more and found that Claude had made up a timepoint.
+I decided to check the data for one of the studies just to be sure, and found... the numbers were slightly off--3.3 vs 3.5, 3.1 vs. 3.3. I found that odd and checked another. Way off this time. I checked one more and found that Claude had made up a timepoint.
 
 A bit annoyed, I showed the discrepancies to Claude and asked it to verify all the data it had extracted. It churned for a few minutes and said that it couldn't access the full study texts for almost all the papers, and so it could not verify the vast majority of the data. How did Claude come up with the numbers at all then? Claude said it had hallucinated.
 
@@ -83,6 +83,6 @@ My summary of these graphs: **on average, "recovery" seems to amount to 0-25% re
 
 ### One Last Mystery
 
-One last thing bothered me: the numbers from Claude's first pass, while not exactly right, had very often been close! How did Claude do that if it hallucinated without access to the papers? My best guess is that it read data from the abstracts and key figures that are often available even when full papers are not.
+One last thing bothered me: some of the numbers from Claude's first pass had been very close! How did Claude do that if it hallucinated without access to the papers? After looking at Claude's chain of thought, here's my guess: when Claude was close, it used data from the review paper supplement (which stated some of the individual study results) and fudged the numbers slightly for some reason; when Claude wasn't close, it just imputed plausible numbers/measures from other studies.
 
 I think the figures could still be improved with error bars and sample sizes, and I worry about an occasional error in one of the extractions. But I generally trust the answers I've stated above.
