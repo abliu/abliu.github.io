@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How Good is Physical Therapy (PT) for Musculoskeletal (MSK) Issues? And How Good is Claude for Visual Literature Review?"
+title: "How Good is Physical Therapy (PT) for Musculoskeletal (MSK) Issues? And How Good is Claude for Literature Review?"
 tags: [health, health-ai]
 ---
 
