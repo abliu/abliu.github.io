@@ -1,0 +1,94 @@
+study,arm,arm_type,month,score_raw,scale_max,invert,outcome_measure,condition,platform,verified,intervention_cat,notes
+Allen 2016,Wait List,Control,0,33.6,96,FALSE,WOMAC Total,Knee OA,None,TRUE,Wait List/No Treatment,Table I baseline
+Allen 2016,Wait List,Control,4,30.2,96,FALSE,WOMAC Total,Knee OA,None,TRUE,Wait List/No Treatment,Table I + Table II LS-mean change (-3.37)
+Allen 2016,Wait List,Control,12,30.8,96,FALSE,WOMAC Total,Knee OA,None,TRUE,Wait List/No Treatment,Table I + Table II LS-mean change (-2.83)
+Allen 2016,PT,Active Control,0,32.0,96,FALSE,WOMAC Total,Knee OA,In-person,TRUE,In-person PT,Table I baseline
+Allen 2016,PT,Active Control,4,25.3,96,FALSE,WOMAC Total,Knee OA,In-person,TRUE,In-person PT,Table I + Table II (-6.73)
+Allen 2016,PT,Active Control,12,27.6,96,FALSE,WOMAC Total,Knee OA,In-person,TRUE,In-person PT,Table I + Table II (-4.42)
+Allen 2016,Web (IBET),Digital,0,31.3,96,FALSE,WOMAC Total,Knee OA,Website,TRUE,Digital,Table I baseline
+Allen 2016,Web (IBET),Digital,4,25.2,96,FALSE,WOMAC Total,Knee OA,Website,TRUE,Digital,Table I + Table II (-6.06)
+Allen 2016,Web (IBET),Digital,12,25.8,96,FALSE,WOMAC Total,Knee OA,Website,TRUE,Digital,Table I + Table II (-5.46)
+Bennell 2017,PCST+Exercise (Digital),Digital,0,6.1,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Digital + PT,Table 2
+Bennell 2017,PCST+Exercise (Digital),Digital,3,3.3,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Digital + PT,Table 2
+Bennell 2017,PCST+Exercise (Digital),Digital,9,3.6,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Digital + PT,Table 2
+Bennell 2017,Education (Internet),Control,0,6.2,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Usual Care (1-Time Information),Table 2
+Bennell 2017,Education (Internet),Control,3,5.1,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Usual Care (1-Time Information),Table 2
+Bennell 2017,Education (Internet),Control,9,4.7,10,FALSE,NRS Pain,Knee OA,Website,TRUE,Usual Care (1-Time Information),Table 2
+Bossen 2013,Join2move (Web),Digital,0,5.4,10,FALSE,NRS Pain,Hip/Knee OA,Website,TRUE,Digital,Table 3 GEE-adjusted mean
+Bossen 2013,Join2move (Web),Digital,3,3.5,10,FALSE,NRS Pain,Hip/Knee OA,Website,TRUE,Digital,Table 3 GEE-adjusted mean
+Bossen 2013,Join2move (Web),Digital,12,3.5,10,FALSE,NRS Pain,Hip/Knee OA,Website,TRUE,Digital,Table 3 GEE-adjusted mean
+Bossen 2013,Wait List,Control,0,4.9,10,FALSE,NRS Pain,Hip/Knee OA,None,TRUE,Wait List/No Treatment,Table 3 GEE-adjusted mean
+Bossen 2013,Wait List,Control,3,4.5,10,FALSE,NRS Pain,Hip/Knee OA,None,TRUE,Wait List/No Treatment,Table 3 GEE-adjusted mean
+Bossen 2013,Wait List,Control,12,3.8,10,FALSE,NRS Pain,Hip/Knee OA,None,TRUE,Wait List/No Treatment,Table 3 GEE-adjusted mean
+Buhrman 2011,Web CBT,Digital,0,3.5,6,FALSE,MPI Pain Severity,Chronic LBP,Website,TRUE,Digital,Table III
+Buhrman 2011,Web CBT,Digital,2.5,3.15,6,FALSE,MPI Pain Severity,Chronic LBP,Website,TRUE,Digital,Table III (post-treatment at ~10 weeks)
+Buhrman 2011,Wait List,Control,0,3.2,6,FALSE,MPI Pain Severity,Chronic LBP,None,TRUE,Wait List/No Treatment,Table III
+Buhrman 2011,Wait List,Control,2.5,3.35,6,FALSE,MPI Pain Severity,Chronic LBP,None,TRUE,Wait List/No Treatment,Table III (post-treatment at ~10 weeks)
+Calner 2017,MMR + Web,Digital,0,66.1,100,FALSE,VAS Pain,Chronic MSK Pain,Website,TRUE,Digital + PT,Table 5 VAS 7 days
+Calner 2017,MMR + Web,Digital,4,59.4,100,FALSE,VAS Pain,Chronic MSK Pain,Website,TRUE,Digital + PT,Table 5
+Calner 2017,MMR + Web,Digital,12,56.6,100,FALSE,VAS Pain,Chronic MSK Pain,Website,TRUE,Digital + PT,Table 5
+Calner 2017,MMR Only,Active Control,0,64.7,100,FALSE,VAS Pain,Chronic MSK Pain,In-person,TRUE,In-person PT,Table 5 VAS 7 days
+Calner 2017,MMR Only,Active Control,4,54.9,100,FALSE,VAS Pain,Chronic MSK Pain,In-person,TRUE,In-person PT,Table 5
+Calner 2017,MMR Only,Active Control,12,57.3,100,FALSE,VAS Pain,Chronic MSK Pain,In-person,TRUE,In-person PT,Table 5
+Carpenter 2012,Web CBT,Digital,0,16.3,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Table 1
+Carpenter 2012,Web CBT,Digital,0.75,13.5,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Table 1 (week 3)
+Carpenter 2012,Web CBT,Digital,1.5,11.9,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Table 1 (week 6)
+Carpenter 2012,Wait List,Control,0,17.1,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Wait List/No Treatment,Table 1
+Carpenter 2012,Wait List,Control,0.75,16.3,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Wait List/No Treatment,Table 1 (week 3)
+Carpenter 2012,Wait List,Control,1.5,12.9,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Wait List/No Treatment,Table 1 (week 6)
+Chhabra 2018,App,Digital,0,7.3,10,FALSE,NPRS Pain,Chronic LBP,App,TRUE,Digital,Table 3
+Chhabra 2018,App,Digital,3,3.3,10,FALSE,NPRS Pain,Chronic LBP,App,TRUE,Digital,Table 3 (12 weeks)
+Chhabra 2018,Standard Care,Control,0,6.6,10,FALSE,NPRS Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 3
+Chhabra 2018,Standard Care,Control,3,3.2,10,FALSE,NPRS Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 3 (12 weeks)
+Chiauzzi 2010,painACTION,Digital,0,5.57,10,FALSE,BPI Average Pain,Chronic LBP,Website,TRUE,Digital,Table 2 LS means
+Chiauzzi 2010,painACTION,Digital,1,5.13,10,FALSE,BPI Average Pain,Chronic LBP,Website,TRUE,Digital,Table 2 (1-month post)
+Chiauzzi 2010,painACTION,Digital,3,5.04,10,FALSE,BPI Average Pain,Chronic LBP,Website,TRUE,Digital,Table 2 (3-month FU)
+Chiauzzi 2010,painACTION,Digital,6,4.78,10,FALSE,BPI Average Pain,Chronic LBP,Website,TRUE,Digital,Table 2 (6-month FU)
+Chiauzzi 2010,Usual Care (1-Time Information),Control,0,5.59,10,FALSE,BPI Average Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 2 LS means
+Chiauzzi 2010,Usual Care (1-Time Information),Control,1,5.35,10,FALSE,BPI Average Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 2 (1-month post)
+Chiauzzi 2010,Usual Care (1-Time Information),Control,3,5.44,10,FALSE,BPI Average Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 2 (3-month FU)
+Chiauzzi 2010,Usual Care (1-Time Information),Control,6,5.18,10,FALSE,BPI Average Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 2 (6-month FU)
+Irvine 2015,FitBack (App),Digital,0,3.83,10,FALSE,BPI Interference,LBP,App,TRUE,Digital,Table 3 Functionality/QoL (1-10)
+Irvine 2015,FitBack (App),Digital,2,3.27,10,FALSE,BPI Interference,LBP,App,TRUE,Digital,Table 3 T2 (8 weeks)
+Irvine 2015,FitBack (App),Digital,4,3.03,10,FALSE,BPI Interference,LBP,App,TRUE,Digital,Table 3 T3 (16 weeks)
+Irvine 2015,Alt Care,Active Control,0,3.93,10,FALSE,BPI Interference,LBP,Website,TRUE,Usual Care (1-Time Information),Table 3
+Irvine 2015,Alt Care,Active Control,2,3.45,10,FALSE,BPI Interference,LBP,Website,TRUE,Usual Care (1-Time Information),Table 3 T2
+Irvine 2015,Alt Care,Active Control,4,3.31,10,FALSE,BPI Interference,LBP,Website,TRUE,Usual Care (1-Time Information),Table 3 T3
+Irvine 2015,Control,Control,0,4.03,10,FALSE,BPI Interference,LBP,None,TRUE,Wait List/No Treatment,Table 3
+Irvine 2015,Control,Control,2,3.85,10,FALSE,BPI Interference,LBP,None,TRUE,Wait List/No Treatment,Table 3 T2
+Irvine 2015,Control,Control,4,3.74,10,FALSE,BPI Interference,LBP,None,TRUE,Wait List/No Treatment,Table 3 T3
+Krein 2013,Web + Pedometer,Digital,0,9.1,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Table 1
+Krein 2013,Web + Pedometer,Digital,6,7.2,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Results text
+Krein 2013,Web + Pedometer,Digital,12,8.0,24,FALSE,RMDQ,Chronic LBP,Website,TRUE,Digital,Estimated from Figure 2A
+Krein 2013,Usual Care (1-Time Information),Control,0,9.8,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 1
+Krein 2013,Usual Care (1-Time Information),Control,6,9.2,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Results text
+Krein 2013,Usual Care (1-Time Information),Control,12,8.5,24,FALSE,RMDQ,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Estimated from Figure 2A
+Mecklenburg 2018,App (Hinge),Digital,0,41.0,100,FALSE,KOOS Pain,Knee Pain,App,TRUE,Digital,Table 3 ITT (0=no pain 100=worst)
+Mecklenburg 2018,App (Hinge),Digital,3,30.3,100,FALSE,KOOS Pain,Knee Pain,App,TRUE,Digital,Table 3 ITT (12 weeks)
+Mecklenburg 2018,Education,Control,0,41.4,100,FALSE,KOOS Pain,Knee Pain,None,TRUE,Usual Care (1-Time Information),Table 3 ITT
+Mecklenburg 2018,Education,Control,3,38.4,100,FALSE,KOOS Pain,Knee Pain,None,TRUE,Usual Care (1-Time Information),Table 3 ITT (12 weeks)
+Petrozzi 2019,MoodGYM + PT,Digital,0,5.1,10,FALSE,NRS Pain,Chronic LBP,Website,TRUE,Digital + PT,Table 3
+Petrozzi 2019,MoodGYM + PT,Digital,2,2.8,10,FALSE,NRS Pain,Chronic LBP,Website,TRUE,Digital + PT,Table 3 (post-treatment 8 weeks)
+Petrozzi 2019,MoodGYM + PT,Digital,6,3.2,10,FALSE,NRS Pain,Chronic LBP,Website,TRUE,Digital + PT,Table 3
+Petrozzi 2019,PT Only,Active Control,0,4.9,10,FALSE,NRS Pain,Chronic LBP,In-person,TRUE,In-person PT,Table 3
+Petrozzi 2019,PT Only,Active Control,2,2.9,10,FALSE,NRS Pain,Chronic LBP,In-person,TRUE,In-person PT,Table 3 (post-treatment 8 weeks)
+Petrozzi 2019,PT Only,Active Control,6,3.2,10,FALSE,NRS Pain,Chronic LBP,In-person,TRUE,In-person PT,Table 3
+Shebib 2019,App (Kaia),Digital,0,46.3,100,FALSE,VAS Pain,Chronic LBP,App,TRUE,Digital,Table 3 ITT (VAS 0-100)
+Shebib 2019,App (Kaia),Digital,3,25.8,100,FALSE,VAS Pain,Chronic LBP,App,TRUE,Digital,Table 3 ITT (12 weeks)
+Shebib 2019,Usual Care (1-Time Information),Control,0,45.4,100,FALSE,VAS Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 3 ITT
+Shebib 2019,Usual Care (1-Time Information),Control,3,40.8,100,FALSE,VAS Pain,Chronic LBP,None,TRUE,Usual Care (1-Time Information),Table 3 ITT (12 weeks)
+Toelle 2019,App (Kaia),Digital,0,5.10,10,FALSE,NRS Pain Index,Chronic LBP,App,TRUE,Digital,Table 2 (mean of current/max/avg NRS)
+Toelle 2019,App (Kaia),Digital,1.5,4.33,10,FALSE,NRS Pain Index,Chronic LBP,App,TRUE,Digital,Table 2 (6 weeks)
+Toelle 2019,App (Kaia),Digital,3,2.70,10,FALSE,NRS Pain Index,Chronic LBP,App,TRUE,Digital,Table 2 (12 weeks)
+Toelle 2019,Web Exercise,Active Control,0,5.41,10,FALSE,NRS Pain Index,Chronic LBP,Website,TRUE,Digital + PT,Table 2
+Toelle 2019,Web Exercise,Active Control,1.5,4.09,10,FALSE,NRS Pain Index,Chronic LBP,Website,TRUE,Digital + PT,Table 2 (6 weeks)
+Toelle 2019,Web Exercise,Active Control,3,3.40,10,FALSE,NRS Pain Index,Chronic LBP,Website,TRUE,Digital + PT,Table 2 (12 weeks)
+Van den Heuvel 2003,Software+Exercise,Digital,0,3.4,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,Software+Exercise,Digital,2,2.9,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,Software+Exercise,Digital,8,2.6,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,Software Breaks,Active Control,0,3.3,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,Software Breaks,Active Control,2,3.1,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,Software Breaks,Active Control,8,2.8,10,FALSE,NRS Pain,Neck/Upper Limb,Software,FALSE,Digital,No PDF - unverified
+Van den Heuvel 2003,No Intervention,Control,0,3.5,10,FALSE,NRS Pain,Neck/Upper Limb,None,FALSE,Wait List/No Treatment,No PDF - unverified
+Van den Heuvel 2003,No Intervention,Control,2,3.3,10,FALSE,NRS Pain,Neck/Upper Limb,None,FALSE,Wait List/No Treatment,No PDF - unverified
+Van den Heuvel 2003,No Intervention,Control,8,3.2,10,FALSE,NRS Pain,Neck/Upper Limb,None,FALSE,Wait List/No Treatment,No PDF - unverified
