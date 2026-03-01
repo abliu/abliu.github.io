@@ -18,7 +18,7 @@ But these reviews were hard to understand: the data were scattered in different 
 
 The tl;dr: **across these studies, people with MSK issues like knee and back pain reported an average of 0%-15% *lower pain* after undergoing PT or digital PT** (blue, teal, salmon) **rather than no treatment or a one-time informational session** (red, gray).
 
-I had fun and frustration (a) cramming all ~14 studies' (~1400 patients') worth of results into one figure (a "visual literature review") and then (b) using Claude Code to extract the data from the papers. I found that Claude Opus 4.6 was hallucinating the extracted data until I provided it copies of all the study PDFs. Read on to learn more...
+I had fun and frustration (a) cramming all 14 studies' (2,660 patients') worth of results into one figure (a "visual literature review") and then (b) using Claude Code to extract the data from the papers. I found that Claude Opus 4.6 was hallucinating the extracted data until I provided it copies of all the study PDFs. Read on to learn more...
 
 ### "Visual Literature Review" (i.e. Infographic)
 

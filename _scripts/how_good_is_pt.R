@@ -407,3 +407,10 @@ summary_table <- data %>%
 cat("\n--- Summary of Normalized Changes ---\n")
 print(summary_table, n = 60)
 
+# Total sample size (one row per study-arm, avoiding double-counting timepoints)
+total_n <- data %>%
+  distinct(study, arm, n) %>%
+  summarize(total = sum(n, na.rm = TRUE)) %>%
+  pull(total)
+cat("\nTotal sample size across all studies:", total_n, "participants\n")
+

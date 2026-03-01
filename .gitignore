@@ -6,3 +6,4 @@ vendor
 .Rproj.user
 Gemfile.lock
 .DS_Store
+_scripts/how_good_is_pt_papers/*
