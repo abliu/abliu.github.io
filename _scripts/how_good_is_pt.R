@@ -108,20 +108,24 @@
 ################################################################################
 
 # --- Install/load packages ---
+if (!require(readr))     install.packages("readr",     repos="https://cloud.r-project.org")
 if (!require(ggplot2))   install.packages("ggplot2",   repos="https://cloud.r-project.org")
 if (!require(dplyr))     install.packages("dplyr",     repos="https://cloud.r-project.org")
 if (!require(tidyr))     install.packages("tidyr",     repos="https://cloud.r-project.org")
 if (!require(ggrepel))   install.packages("ggrepel",   repos="https://cloud.r-project.org")
 if (!require(scales))    install.packages("scales",    repos="https://cloud.r-project.org")
 if (!require(patchwork)) install.packages("patchwork",  repos="https://cloud.r-project.org")
+if (!require(stringr))   install.packages("stringr",   repos="https://cloud.r-project.org")
 setwd("/Users/abl19/Code_not_Dropbox/abliu.github.io/")
 
+library(readr)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(ggrepel)
 library(scales)
 library(patchwork)
+library(stringr)
 
 # ==============================================================================
 # DATA COMPILATION
@@ -147,7 +151,8 @@ library(patchwork)
 # from published figures. These are noted with comments.
 # ==============================================================================
 
-data_raw <- read_csv("_scripts/raw_pt_study_data.csv")
+data_raw <- read_csv("_scripts/raw_pt_study_data.csv") %>%
+  filter(verified)
 
 # ==============================================================================
 # NORMALIZE TO 0-100 SCALE
@@ -176,40 +181,22 @@ data <- data %>%
       "OA (Knee/Hip)", "LBP (Acute/Subacute)", "Chronic LBP",
       "Chronic MSK Pain", "Other MSK"
     )),
-    # Combined intervention category
-    intervention_cat = case_when(
-      # Digital + PT combinations
-      line_id == "Bennell 2017 | PCST+PT (Digital)" ~ "Digital + PT",
-      line_id == "Petrozzi 2019 | MoodGYM + PT"     ~ "Digital + PT",
-      line_id == "Calner 2015 | MMR + Web"           ~ "Digital + PT",
-      line_id == "Toelle 2019 | Web Exercise"        ~ "Digital + PT",
-      # In-person PT
-      line_id == "Allen 2016 | PT"                   ~ "In-person PT",
-      line_id == "Petrozzi 2019 | PT Only"           ~ "In-person PT",
-      line_id == "Bennell 2017 | PT + Education"     ~ "In-person PT",
-      line_id == "Calner 2015 | MMR Only"            ~ "In-person PT",
-      # Usual care
-      line_id == "Chhabra 2018 | Standard Care"      ~ "Usual Care",
-      line_id == "Chiauzzi 2010 | Usual Care"        ~ "Usual Care",
-      line_id == "Del Pozo-Cruz 2012 | Usual Care"   ~ "Usual Care",
-      line_id == "Krein 2013 | Usual Care"            ~ "Usual Care",
-      line_id == "Shebib 2019 | Usual Care"           ~ "Usual Care",
-      line_id == "Mecklenburg 2018 | Education"       ~ "Usual Care",
-      line_id == "Irvine 2015 | Alt Care"             ~ "Usual Care",
-      line_id == "Marangoni 2010 | Print Stretch"     ~ "Usual Care",
-      # Wait List / No Treatment
-      arm_type == "Control" & grepl("Wait|No Intervention|Assessment|Control$", arm) ~ "Wait List/No Treatment",
-      # Everything else is Digital
-      TRUE ~ "Digital"
-    ),
+    # Study label with condition for legends
+    study_label = paste0(study, " (", condition, ")"),
+    # intervention_cat comes from CSV; just convert to factor
     intervention_cat = factor(intervention_cat, levels = c(
-      "Digital", "Digital + PT", "In-person PT", "Usual Care", "Wait List/No Treatment"
+      "Digital", "Digital + PT", "In-person PT",
+      "Usual Care (1-Time Information)", "Wait List/No Treatment"
     ))
   )
 
 # ==============================================================================
 # MAIN PLOT: All studies overlaid, colored by arm type
 # ==============================================================================
+
+# Compute study/instrument counts for plot labels
+n_studies <- length(unique(data$study))
+instruments_used <- paste(sort(unique(data$outcome_measure)), collapse = ", ")
 
 # Get endpoint labels (last timepoint per line)
 label_data <- data %>%
@@ -219,78 +206,38 @@ label_data <- data %>%
 
 # Color palette for intervention category (used in p_effects)
 intervention_colors <- c(
-  "Digital"                = "#2166AC",  # Blue
-  "Digital + PT"           = "#7FCDBB",  # Teal
-  "In-person PT"           = "#F4A582",  # Salmon
-  "Usual Care"             = "#B2182B",  # Red
-  "Wait List/No Treatment" = "#999999"   # Grey
+  "Digital"                            = "#2166AC",  # Blue
+  "Digital + PT"                       = "#7FCDBB",  # Teal
+  "In-person PT"                       = "#F4A582",  # Salmon
+  "Usual Care (1-Time Information)"    = "#B2182B",  # Red
+  "Wait List/No Treatment"             = "#999999"   # Grey
 )
 
 # Linetype by intervention category (used in p_main)
 intervention_lines <- c(
-  "Digital"                = "solid",
-  "Digital + PT"           = "dashed",
-  "In-person PT"           = "dotted",
-  "Usual Care"             = "dotdash",
-  "Wait List/No Treatment" = "longdash"
+  "Digital"                            = "solid",
+  "Digital + PT"                       = "dashed",
+  "In-person PT"                       = "dotted",
+  "Usual Care (1-Time Information)"    = "dotdash",
+  "Wait List/No Treatment"             = "longdash"
 )
 
-# Color palette for studies (used in p_main) — 18 distinct colors
-studies <- sort(unique(data$study))
-study_colors <- setNames(
-  c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#A65628",
-    "#F781BF", "#999999", "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
-    "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3", "#1B9E77", "#D95F02"),
-  studies
-)
+# Color palette for studies (used in p_main)
+study_labels <- sort(unique(data$study_label))
+all_colors <- c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#A65628",
+                "#F781BF", "#999999", "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
+                "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3", "#1B9E77", "#D95F02")
+study_colors <- setNames(all_colors[seq_along(study_labels)], study_labels)
 
-# Point shapes for studies (used in p_effects) — shapes 0–17
-study_shapes <- setNames(0:(length(studies) - 1), studies)
+# Point shapes for studies (used in p_effects)
+study_shapes <- setNames(0:(length(study_labels) - 1), study_labels)
 
 # ==============================================================================
 # MAIN PLOT: All studies overlaid, colored by study, linetype by intervention
 # ==============================================================================
 
-p_main <- ggplot(data, aes(x = month, y = score_normalized,
-                            group = line_id, color = study)) +
-  geom_line(aes(linetype = intervention_cat), linewidth = 0.7, alpha = 0.7) +
-  geom_point(size = 2.2, alpha = 0.8) +
-  geom_text_repel(
-    data = label_data,
-    aes(label = paste0(study, "\n", arm)),
-    size = 2.2, lineheight = 0.85,
-    nudge_x = 0.5, direction = "y",
-    segment.size = 0.3, segment.alpha = 0.5,
-    max.overlaps = 30,
-    show.legend = FALSE
-  ) +
-  scale_color_manual(
-    values = study_colors,
-    name = "Study"
-  ) +
-  scale_linetype_manual(
-    values = intervention_lines,
-    name = "Intervention"
-  ) +
-  scale_x_continuous(
-    breaks = c(0, 1, 2, 3, 4, 5, 6, 8, 9, 12),
-    limits = c(0, 14),
-    name = "Month"
-  ) +
-  scale_y_continuous(
-    limits = c(0, 75),
-    name = "Normalized Score (0-100)\n0 = No Pain/Disability, 100 = Worst"
-  ) +
-  labs(
-    title = "Digital Health Interventions for Musculoskeletal Conditions",
-    subtitle = "Outcome trajectories from 18 RCTs (Hewitt et al. 2020 review)\nScores normalized to 0-100 scale across different instruments",
-    caption = paste0(
-      "Studies: Allen, Bennell 2017, Bossen, Buhrman, Calner/Nordin, Carpenter, Chhabra, Chiauzzi,\n",
-      "Del Pozo-Cruz, Irvine, Krein, Marangoni, Mecklenburg, Peters, Petrozzi, Shebib, Toelle, Van den Heuvel\n",
-      "Instruments normalized: WOMAC, NRS, VAS, RMDQ, ODI, KOOS, MPI, BPI"
-    )
-  ) +
-  theme_minimal(base_size = 12) +
+# Shared theme and x-axis scale
+theme_pt <- theme_minimal(base_size = 12) +
   theme(
     plot.title = element_text(face = "bold", size = 14),
     plot.subtitle = element_text(size = 10, color = "grey40"),
@@ -301,7 +248,49 @@ p_main <- ggplot(data, aes(x = month, y = score_normalized,
     legend.title = element_text(size = 10, face = "bold"),
     panel.grid.minor = element_blank(),
     plot.margin = margin(10, 10, 10, 10)
+  )
+
+scale_x_month <- scale_x_continuous(
+  breaks = c(0, 1, 2, 3, 4, 5, 6, 8, 9, 12),
+  limits = c(0, 14),
+  name = "Month"
+)
+
+# Shared geom_text_repel helper (takes a label dataset)
+repel_labels <- function(ldata) {
+  geom_text_repel(
+    data = ldata,
+    aes(label = paste0(study, "\n", arm)),
+    size = 2.2, lineheight = 0.85,
+    nudge_x = 0.5, direction = "y",
+    segment.size = 0.3, segment.alpha = 0.5,
+    max.overlaps = 30,
+    show.legend = FALSE
+  )
+}
+
+instruments_caption <- str_wrap(paste0("Pain instruments normalized: ", instruments_used), width = 100)
+abbrev_caption <- str_wrap("IBET = Internet-Based Exercise Training, PCST = Pain Coping Skills Training, MMR = Multimodal Rehabilitation, CBT = Cognitive Behavioral Therapy, iCBT = Internet-based CBT, PPI = Positive Psychology Intervention", width = 100)
+title <- "Impact of PT and Digital PT"
+
+p_main <- ggplot(data, aes(x = month, y = score_normalized,
+                            group = line_id, color = study_label)) +
+  geom_line(aes(linetype = intervention_cat), linewidth = 0.7, alpha = 0.7) +
+  geom_point(size = 2.2, alpha = 0.8) +
+  repel_labels(label_data) +
+  scale_color_manual(values = study_colors, name = "Study") +
+  scale_linetype_manual(values = intervention_lines, name = "Intervention") +
+  scale_x_month +
+  scale_y_continuous(
+    limits = c(0, 75),
+    name = "Pain (0-100)\n0 = No Pain/Disability, 100 = Worst"
   ) +
+  labs(
+    title = title,
+    subtitle = paste0("Outcome trajectories from ", n_studies, " RCTs (Hewitt et al. 2020 review)\nScores normalized to 0-100 scale across different instruments"),
+    caption = paste0(instruments_caption, "\n", abbrev_caption)
+  ) +
+  theme_pt +
   guides(
     color = guide_legend(order = 1, ncol = 1),
     linetype = guide_legend(order = 2)
@@ -326,55 +315,53 @@ p_effects <- ggplot(data_effects, aes(x = month, y = score_diff,
                                        group = line_id, color = intervention_cat)) +
   geom_hline(yintercept = 0, linewidth = 0.4, color = "grey50", linetype = "dashed") +
   geom_line(linewidth = 0.7, alpha = 0.7) +
-  geom_point(aes(shape = study), size = 2.2, alpha = 0.8) +
-  geom_text_repel(
-    data = label_data_effects,
-    aes(label = paste0(study, "\n", arm)),
-    size = 2.2, lineheight = 0.85,
-    nudge_x = 0.5, direction = "y",
-    segment.size = 0.3, segment.alpha = 0.5,
-    max.overlaps = 30,
-    show.legend = FALSE
-  ) +
-  scale_color_manual(
-    values = intervention_colors,
-    name = "Intervention"
-  ) +
-  scale_shape_manual(
-    values = study_shapes,
-    name = "Study"
-  ) +
-  scale_x_continuous(
-    breaks = c(0, 1, 2, 3, 4, 5, 6, 8, 9, 12),
-    limits = c(0, 14),
-    name = "Month"
-  ) +
+  geom_point(aes(shape = study_label), size = 2.2, alpha = 0.8) +
+  repel_labels(label_data_effects) +
+  scale_color_manual(values = intervention_colors, name = "Intervention") +
+  scale_shape_manual(values = study_shapes, name = "Study") +
+  scale_x_month +
   scale_y_continuous(
-    name = "Change from Baseline (normalized points)\nNegative = Improvement"
+    name = "Change in Pain (0-100 scale) from Baseline\nNegative = Improvement"
   ) +
   labs(
-    title = "Digital Health Interventions: Change from Baseline",
+    title = paste0(title, ": Change from Baseline"),
     subtitle = "All lines start at 0; negative values indicate improvement",
-    caption = paste0(
-      "18 RCTs from Hewitt et al. (2020) review\n",
-      "Instruments normalized: WOMAC, NRS, VAS, RMDQ, ODI, KOOS, MPI, BPI"
-    )
+    caption = paste0(n_studies, " RCTs from Hewitt et al. (2020) review\n", instruments_caption, "\n", abbrev_caption)
   ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    plot.subtitle = element_text(size = 10, color = "grey40"),
-    plot.caption = element_text(size = 7, color = "grey50", hjust = 0),
-    legend.position = "right",
-    legend.box = "vertical",
-    legend.text = element_text(size = 9),
-    legend.title = element_text(size = 10, face = "bold"),
-    panel.grid.minor = element_blank(),
-    plot.margin = margin(10, 10, 10, 10)
-  ) +
+  theme_pt +
   guides(
     color = guide_legend(order = 1),
     shape = guide_legend(order = 2, ncol = 1)
+  )
+
+# ==============================================================================
+# FACETED EFFECTS PLOT: One panel per study, colored by intervention
+# ==============================================================================
+
+p_effects_faceted <- ggplot(data_effects, aes(x = month, y = score_diff,
+                                               group = line_id, color = intervention_cat)) +
+  geom_hline(yintercept = 0, linewidth = 0.3, color = "grey50", linetype = "dashed") +
+  geom_line(linewidth = 0.7, alpha = 0.8) +
+  geom_point(size = 1.8, alpha = 0.8) +
+  geom_text_repel(
+    data = data_effects %>% group_by(line_id) %>% filter(month == max(month)) %>% ungroup(),
+    aes(label = arm), size = 1.8, lineheight = 0.8,
+    nudge_x = 0.3, segment.size = 0.2, segment.alpha = 0.4,
+    max.overlaps = 20, show.legend = FALSE
+  ) +
+  facet_wrap(~ study_label) +
+  scale_color_manual(values = intervention_colors, name = "Intervention") +
+  scale_y_continuous(name = "Change in Pain (0-100) from Baseline\nNegative = Improvement") +
+  scale_x_continuous(name = "Month") +
+  labs(
+    title = paste0(title, ": Change from Baseline by Study"),
+    subtitle = "Each panel is one study; all lines start at 0; negative = improvement",
+    caption = paste0(n_studies, " RCTs from Hewitt et al. (2020) review\n", instruments_caption, "\n", abbrev_caption)
+  ) +
+  theme_pt +
+  theme(
+    strip.text = element_text(size = 7, face = "bold"),
+    legend.position = "bottom"
   )
 
 # ==============================================================================
@@ -382,22 +369,25 @@ p_effects <- ggplot(data_effects, aes(x = month, y = score_diff,
 # ==============================================================================
 
 # Resolve output directory relative to project root using here::here()
-if (!require(here)) install.packages("here", repos="https://cloud.r-project.org")
-library(here)
-output_dir <- here("assets", "images")
+output_dir <- "assets/images"
 
 ggsave(file.path(output_dir, "digital_pt_all_studies_overlay.png"),
-       p_main, width = 14, height = 9, dpi = 300, bg = "white")
+       p_main, width = 10, height = 7, dpi = 300, bg = "white")
 
 ggsave(file.path(output_dir, "digital_pt_effects_from_baseline.png"),
-       p_effects, width = 14, height = 9, dpi = 300, bg = "white")
+       p_effects, width = 10, height = 7, dpi = 300, bg = "white")
+
+ggsave(file.path(output_dir, "digital_pt_effects_faceted.png"),
+       p_effects_faceted, width = 10, height = 7, dpi = 300, bg = "white")
 
 cat("Plots saved successfully!\n")
 cat("  1. digital_pt_all_studies_overlay.png - All studies, colored by study\n")
 cat("  2. digital_pt_effects_from_baseline.png - Change from baseline, colored by intervention\n")
+cat("  3. digital_pt_effects_faceted.png - Change from baseline, faceted by study\n")
 
 p_main
 p_effects
+p_effects_faceted
 
 # ==============================================================================
 # SUMMARY TABLE
