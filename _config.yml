@@ -39,8 +39,8 @@ profile:
   # Set `external: true` to get the ↗ arrow.
   links:
     - { name: "LinkedIn", url: "https://www.linkedin.com/in/andrew-liu-phd-8bb07929/", external: true }
-    - { name: "Twitter",  url: "https://twitter.com/andrew2liu",     external: true }
-    - { name: "GitHub",   url: "https://github.com/abliu",           external: true }
+    # - { name: "Twitter",  url: "https://twitter.com/andrew2liu", external: true }
+    # - { name: "GitHub",   url: "https://github.com/abliu",       external: true }
     # - { name: "Email",    url: "mailto:you@example.com" }
     # - { name: "Scholar",  url: "https://scholar.google.com/...",  external: true }
   # Short "Background" blurb shown at the bottom of the homepage (Markdown OK).
