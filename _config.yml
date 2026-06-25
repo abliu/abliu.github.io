@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Andrew Liu's website
+title: Andrew Liu
 # email: your-email@example.com
 # description: >- # this means to ignore newlines until "baseurl:"
 #   Write an awesome description for your new site here. You can edit this
@@ -29,6 +29,40 @@ domain: abliu.github.io       # if you want to force HTTPS, specify the domain w
 url: https://abliu.github.io # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: andrew2liu
 github_username:  abliu
+
+# Homepage intro + links (rendered by _layouts/home.html)
+profile:
+  headline: "I am Head of Applied Research on SecureBio's AI team and did my PhD in bioinformatics at Harvard."
+  tagline: "Thinking about biosecurity, health AI, volleyball, and what makes for a fulfilling life."
+  # Each link shows in the row under the intro. Add/remove freely.
+  # Set `external: true` to get the ↗ arrow.
+  links:
+    - { name: "GitHub",   url: "https://github.com/abliu",           external: true }
+    - { name: "Twitter",  url: "https://twitter.com/andrew2liu",     external: true }
+    - { name: "LinkedIn", url: "https://www.linkedin.com/in/andrew-liu-phd-8bb07929/", external: true }
+    # - { name: "Email",    url: "mailto:you@example.com" }
+    # - { name: "Scholar",  url: "https://scholar.google.com/...",  external: true }
+  # Short "Background" blurb shown at the bottom of the homepage (Markdown OK).
+  background: >
+    I'm Head of Applied Research on [SecureBio](https://securebio.org/)'s AI team
+    and a graduate of Harvard's Bioinformatics and Integrative Genomics PhD program
+    (Michael Springer's lab). I've published research in infectious-disease early
+    detection, biosecurity, and pandemic preparedness, and was a Fellow in the
+    Emerging Leaders in Biosecurity program.
+
+# Featured-star threshold: posts with importance >= this get a ★ on the homepage.
+featured_importance: 5
+
+# Show just the year next to each post on the homepage list.
+minima:
+  date_format: "%Y"
+
+# Umami analytics (Umami Cloud free tier). Paste your website ID below after
+# creating the site at https://cloud.umami.is — the script only loads in
+# production once `website_id` is set, so local `jekyll serve` views aren't counted.
+umami:
+  website_id: "400856de-b21c-493e-ba2f-20a02511ca36"   # e.g. "1a2b3c4d-...". Leave blank to disable.
+  src: "https://cloud.umami.is/script.js"
 
 # Build settings
 theme: minima

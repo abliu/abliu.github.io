@@ -2,6 +2,7 @@
 layout: post
 title: "Work Attitudes"
 tags: [work]
+importance: 7
 ---
 
 - Dates: 2010-06-01 - present

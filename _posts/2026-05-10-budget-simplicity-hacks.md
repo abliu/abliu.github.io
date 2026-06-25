@@ -2,6 +2,7 @@
 layout: post
 title: "Budget and Simplicity Hacks"
 tags: [budget]
+importance: 5
 ---
 
 - Dates: 2026-05-10 - present

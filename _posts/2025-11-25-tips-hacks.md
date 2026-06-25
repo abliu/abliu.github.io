@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Some Tips/Hacks (Including One That Got Me Into Harvard)"
-tag: misc
+tags: [misc]
+importance: 4
 ---
 
 - Dates: 2025-11-25 - present

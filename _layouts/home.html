@@ -1,0 +1,127 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  {%- comment -%} ---- Intro: headline + tagline + links ---- {%- endcomment -%}
+  <section class="intro">
+    {%- if site.profile.headline -%}
+      <p class="headline">{{ site.profile.headline }}</p>
+    {%- endif -%}
+    {%- if site.profile.tagline -%}
+      <p class="tagline">{{ site.profile.tagline }}</p>
+    {%- endif -%}
+    {%- if site.profile.links -%}
+      <p class="intro-links">
+        {%- for link in site.profile.links -%}
+          <a href="{{ link.url | relative_url }}"{% if link.external %} target="_blank" rel="noopener"{% endif %}>{{ link.name }}{% if link.external %}<span class="ext">&#8599;</span>{% endif %}</a>{%- unless forloop.last %} <span class="sep">·</span> {% endunless -%}
+        {%- endfor -%}
+      </p>
+    {%- endif -%}
+  </section>
+
+  {%- comment -%} ---- Writing: tag filter + year-grouped list ---- {%- endcomment -%}
+  {%- if site.posts.size > 0 -%}
+  <section class="writing">
+    <h2 class="section-heading">Writing</h2>
+
+    <p class="tag-filter" id="tag-filter">
+      <span class="tag-filter-hint">Click a tag to filter</span>
+      {%- assign tags = site.tags | sort -%}
+      {%- for tag in tags -%}
+        <button type="button" class="tag" data-tag="{{ tag[0] | escape }}">{{ tag[0] | escape }}</button>
+      {%- endfor -%}
+      <button type="button" class="tag show-all is-active" data-tag="">show all</button>
+    </p>
+
+    {%- assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+    <div class="post-list" id="post-list">
+      {%- for year in posts_by_year -%}
+      <div class="year-group" data-year="{{ year.name }}">
+        <h3 class="year">{{ year.name }}</h3>
+        <ul>
+          {%- for post in year.items -%}
+          <li class="post-row" data-tags="{{ post.tags | join: ' ' | escape }}">
+            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            {%- if post.importance and post.importance >= site.featured_importance -%}
+              <span class="star" title="Featured">&#9733;</span>
+            {%- endif -%}
+            {%- if post.tags.size > 0 -%}
+            <span class="post-tags">
+              {%- for t in post.tags -%}<button type="button" class="tag inline-tag" data-tag="{{ t | escape }}">{{ t | escape }}</button>{%- endfor -%}
+            </span>
+            {%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endfor -%}
+    </div>
+
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ---- Background blurb ---- {%- endcomment -%}
+  {%- if site.profile.background -%}
+  <section class="background">
+    <h2 class="section-heading">Background</h2>
+    {{ site.profile.background | markdownify }}
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} Any Markdown in index.markdown renders here. {%- endcomment -%}
+  {{ content }}
+
+</div>
+
+<script>
+  (function () {
+    var list = document.getElementById('post-list');
+    var filterBar = document.getElementById('tag-filter');
+    if (!list || !filterBar) return;
+
+    function apply(tag) {
+      // Show/hide rows.
+      var rows = list.querySelectorAll('.post-row');
+      rows.forEach(function (row) {
+        var tags = (row.getAttribute('data-tags') || '').split(/\s+/);
+        var show = !tag || tags.indexOf(tag) !== -1;
+        row.style.display = show ? '' : 'none';
+      });
+      // Hide year groups that have no visible rows.
+      list.querySelectorAll('.year-group').forEach(function (group) {
+        var anyVisible = Array.prototype.some.call(
+          group.querySelectorAll('.post-row'),
+          function (r) { return r.style.display !== 'none'; }
+        );
+        group.style.display = anyVisible ? '' : 'none';
+      });
+      // Highlight the active filter button(s).
+      document.querySelectorAll('.tag').forEach(function (btn) {
+        btn.classList.toggle('is-active', (btn.getAttribute('data-tag') || '') === (tag || ''));
+      });
+      // Reflect in the URL hash so filters are shareable.
+      if (tag) {
+        history.replaceState(null, '', '#tag=' + encodeURIComponent(tag));
+      } else {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.tag');
+      if (!btn) return;
+      e.preventDefault();
+      apply(btn.getAttribute('data-tag') || '');
+      if (btn.classList.contains('inline-tag')) {
+        document.getElementById('tag-filter').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    // Apply filter from URL hash on load (e.g. #tag=health-ai).
+    var m = location.hash.match(/^#tag=(.+)$/);
+    if (m) apply(decodeURIComponent(m[1]));
+  })();
+</script>

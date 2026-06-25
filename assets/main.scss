@@ -1,0 +1,175 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "minima";
+
+/* ----------------------------------------------------------------------------
+   Homepage (harm0n-inspired): clean intro, year-grouped writing list with
+   clickable tag filters, and a short background section.
+   ------------------------------------------------------------------------- */
+
+.home {
+  max-width: 42em;
+}
+
+/* ---- Intro ---- */
+.intro {
+  margin-bottom: 2.5em;
+
+  .headline,
+  .tagline {
+    color: #555;
+    font-size: 1.05em;
+    font-weight: 400;
+    line-height: 1.45;
+    margin-bottom: 0.5em;
+  }
+
+  .tagline {
+    margin-bottom: 0.9em;
+  }
+
+  .intro-links {
+    font-size: 0.95em;
+    margin-bottom: 0;
+
+    a { font-weight: 500; }
+    .sep { color: #bbb; margin: 0 0.15em; }
+    .ext { font-size: 0.8em; }
+  }
+}
+
+/* ---- Section headings ---- */
+.section-heading {
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
+  margin-bottom: 1em;
+}
+
+/* ---- Tag filter bar ---- */
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 1.5em;
+
+  .tag-filter-hint {
+    color: #999;
+    font-size: 0.85em;
+    margin-right: 0.4em;
+  }
+}
+
+/* Tag pills (shared by the filter bar and inline post tags) */
+.tag {
+  display: inline-block;
+  font: inherit;
+  font-size: 0.78em;
+  line-height: 1.4;
+  color: #5a5a5a;
+  background: #f2f2f2;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.1em 0.7em;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+
+  &:hover { background: #e4e4e4; }
+
+  &.is-active {
+    background: #2a7ae2;
+    color: #fff;
+  }
+
+  &.show-all {
+    background: transparent;
+    color: #999;
+    text-decoration: underline;
+    &.is-active { background: transparent; color: #2a7ae2; }
+  }
+}
+
+/* ---- Year-grouped post list ---- */
+.post-list {
+  .year-group {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    margin-bottom: 1.2em;
+  }
+
+  .year {
+    flex: 0 0 3em;
+    margin: 0;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #aaa;
+    padding-top: 0.05em;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    flex: 1 1 auto;
+  }
+
+  .post-row {
+    margin-bottom: 0.55em;
+    line-height: 1.4;
+  }
+
+  .post-link {
+    display: inline;
+    font-size: 1em;
+    font-weight: 500;
+    color: #1a1a1a;
+    &:hover { color: #2a7ae2; text-decoration: none; }
+  }
+
+  .star {
+    color: #e6b800;
+    font-size: 0.85em;
+    margin-left: 0.25em;
+  }
+
+  .post-tags {
+    margin-left: 0.4em;
+    white-space: nowrap;
+
+    .inline-tag {
+      font-size: 0.7em;
+      padding: 0.05em 0.55em;
+      margin-left: 0.2em;
+      vertical-align: middle;
+    }
+  }
+}
+
+.rss-subscribe {
+  font-size: 0.9em;
+  color: #999;
+  margin-top: 1.5em;
+}
+
+/* ---- Background ---- */
+.background {
+  margin-top: 2.5em;
+
+  p { color: #333; }
+}
+
+/* Narrow screens: stack the year above its posts */
+@media (max-width: 600px) {
+  .post-list .year-group {
+    flex-direction: column;
+    gap: 0.2em;
+  }
+  .post-list .year { flex-basis: auto; }
+}

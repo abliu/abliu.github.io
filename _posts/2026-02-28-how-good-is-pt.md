@@ -2,6 +2,7 @@
 layout: post
 title: "How Good is Physical Therapy (PT) for Musculoskeletal (MSK) Issues? And How Good is Claude for Literature Review?"
 tags: [health, health-ai]
+importance: 4
 ---
 
 - Dates: 2026-02-28 - present

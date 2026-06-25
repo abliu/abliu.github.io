@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Progress Log on Project on Digital PT/musculoskeletal info"
-tag: health-ai
+tags: [health-ai]
+importance: 4
 ---
 
 - Dates: 2025-07-01 - present
