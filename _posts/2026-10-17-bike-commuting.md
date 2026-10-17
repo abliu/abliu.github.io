@@ -24,6 +24,8 @@ I see a few key barriers:
 1. Obviously some commutes (I’d say longer than 7 miles one-way for non-electric bikes) are too long to feasibly do by bike everyday.
 2. Then there are some of the hassles of bike ownership: acquiring, maintaining, and safely parking a bike.
 3. Another is safety, both actual and perceived. Some destinations genuinely lack safe routes to get there; others have safe routes, but beginning bikers are not comfortable biking on the same road as cars.
+4. Some people are worried about arriving sweaty/messy to work.
+5. Some people don't like biking in the heat (summer) or cold (winter).
 
 ### Solutions: bike share programs and infrastructure like bike lanes
 
@@ -36,6 +38,14 @@ Cities like Boston and San Francisco have invested quite a bit in (a) bike share
 I think we can give these initiatives decent credit for the result that the number of Boston bike commuters has increased from 4,400 in 2010 (a few years after the city’s Boston Bikes initiative and just before BlueBikes began in 2011) to 8,100 in 2014 and 10,700 in 2024 (see below). At the time of this writing, Bluebikes riders have taken more than 32 million total trips across the Greatest Boston area![^stats]
 
 ![](/assets/images/boston_bike_commuters.png)
+
+### Solutions: sweatiness and temperature
+
+My opinion is barriers 4 (sweatiness) and 5 (heat/cold) above are not a big deal in cities with climates like Boston and San Francisco. I typically sweat a lot but, by putting some thought into my riding clothes each morning, I avoid sweating much on the ride. Often I'll wear a long-sleeve shirt, shorts, and maybe a hoodie in 55-degree weather (yes shorts -- the legs heat up more quickly than you'd expect). If I need to wear long pants at work, I roll up the long pants during the ride as pseudo-shorts, and I roll them back down when I get to work. I also adjust my clothes during the ride. If my upper body is feeling hot, I'll unzip the hoodie, or even pause the ride on the sidewalk to take the hoodie off and put it in my bag or drape it around my shoulders like a cardigan.
+
+Correspondingly, I put on more layers when riding in Boston's colder weather. I usually wear gloves when it's below ~50 degrees. I also wear a balaclava when it gets below 40 degrees (otherwise my ears hurt from the stinging cold). If one layer of pants isn't thick enough, I wear long underwear underneath.
+
+It might sound complicated, but honestly it's barely different than the layering that New Englanders and others have done their whole lives. (You Californians luckily don't have to deal with this; you can probably figure out one outfit that fits you for most of the year.)
 
 ## Looking forward
 
