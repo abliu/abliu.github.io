@@ -33,7 +33,7 @@ linkedin_username: andrew-liu-phd-8bb07929
 
 # Homepage intro + links (rendered by _layouts/home.html)
 profile:
-  headline: "I am Head of Applied Research on SecureBio's AI team and did my PhD in bioinformatics at Harvard."
+  headline: "I work on AI safety (biosecurity) at OpenAI as a Member of Technical Staff. Before this, I was Head of Applied Research on SecureBio's AI team and did my PhD in bioinformatics at Harvard."
   tagline: "Thinking about biosecurity, health AI, volleyball, and what makes for a fulfilling life."
   # Each link shows in the row under the intro. Add/remove freely.
   # Set `external: true` to get the ↗ arrow.
